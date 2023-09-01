@@ -13,7 +13,7 @@ async function serchImgs(searchValue) {
 
   const params = new URLSearchParams({
     key: API_KEY,
-    q: `${searchValue}`,
+    q: searchValue,
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
