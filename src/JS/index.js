@@ -2,6 +2,8 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 // Functions
 import { serchImgs, incrementPage, resetPage } from './search-api';
+import { createMarkup } from './create-markup';
+import { smoothScroll } from './smooth-scrol';
 // Variables
 import { currentPage, limitPerPage } from './search-api';
 
@@ -101,47 +103,4 @@ function onLoadBtnClick(evt) {
       smoothScroll();
     })
     .catch(err => console.log(err));
-}
-
-function createMarkup(arr) {
-  return arr
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => `<div class="photo-card">
-      <a href="${largeImageURL}"><img class="photo" src="${webformatURL}" alt="${tags}" loading="lazy" width="320" height="200" /></a>
-    <div class="info">
-      <p class="info-item">
-        <b>Likes: ${likes}</b>
-      </p>
-      <p class="info-item">
-        <b>Views: ${views}</b>
-      </p>
-      <p class="info-item">
-        <b>Comments: ${comments}</b>
-      </p>
-      <p class="info-item">
-        <b>Downloads: ${downloads}</b>
-      </p>
-    </div>
-  </div>`
-    )
-    .join('');
-}
-
-function smoothScroll() {
-  const { height: cardHeight } = document
-    .querySelector('.gallery')
-    .firstElementChild.getBoundingClientRect();
-
-  window.scrollBy({
-    top: cardHeight * 2,
-    behavior: 'smooth',
-  });
 }
